@@ -58,6 +58,28 @@ const teamMembers = [
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
 
+// function to write html files
+function writeToFile(fileName, data) {
+    // process.cwd-build direction out. location of the file. 
+   return fs.writeFileSync(path.join(process.cwd(), fileName), data)
+   
+}
+
+// function to initialize program
+function init() {
+    // inquirer asks questions
+    // prompt(teamMembers)- all questions from questions array
+    inquirer.prompt(teamMembers).then(responseAnswers => {
+        // function gets us what we want 
+        const htmlRender = render(responseAnswers)
+        writeToFile('main.html', htmlRender)
+    });
+}
+// function call to initialize program
+init();
+
+
+
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
