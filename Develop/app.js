@@ -10,7 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-
+const employees = [];
 const manager = [
     {
         type: 'input',
@@ -94,7 +94,7 @@ const addemployee = () => {
         }).then(response => {
             switch (response.kind) {
                 case 'manager':
-                    addmanager();
+                    addManager();
                     break;
                 case 'engineer':
                     addEngineer();
@@ -107,6 +107,8 @@ const addemployee = () => {
                 
             }
         })
+    } else {
+        createFile();
     }
     })
 };
@@ -120,12 +122,12 @@ const addManager = ()=>(inquirer.prompt(manager)).then(data =>{
 });
 
 const addEngineer = ()=>(inquirer.prompt(engineer)).then(data =>{
-    
     const engineer = new Engineer(data.name, data.id, data.email, data.github);
     employees.push(engineer);
 
     addemployee ()
 });
+
 
 const addIntern = ()=>(inquirer.prompt(intern)).then(data =>{
     const intern = new Intern(data.name, data.id, data.email, data.school);
@@ -134,14 +136,15 @@ const addIntern = ()=>(inquirer.prompt(intern)).then(data =>{
     addemployee ()
 });
 
-const employees = [];
+
 
 // function to initialize program
-function init() {
-    addManager();
+function createFile() {
     return fs.writeFileSync (outputPath, render(employees))
 }
-init();
+
+createFile();
+addManager();
 
 
 
