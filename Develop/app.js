@@ -79,17 +79,6 @@ const intern = [
     },
 ]
 
-
-
-// function to write html files
-function writeToFile(fileName, data) {
-    // process.cwd-build direction out.location of the file. 
-   return fs.writeFileSync(path.join(process.cwd(), fileName), data)
-   
-};
-
-
-
 const addemployee = () => {
     inquirer.prompt({
         type: 'confirm',
@@ -121,6 +110,7 @@ const addemployee = () => {
     })
 };
 
+
 const addmanager = ()=>(inquirer.prompt(manager)).then(responseAnswers =>{
     addemployee ()
 });
@@ -133,14 +123,15 @@ const addIntern = ()=>(inquirer.prompt(intern)).then(responseAnswers =>{
     addemployee ()
 });
 
+const employees = [];
 
 // function to initialize program
 function init() {
     addmanager();
-    
+    return fs.writeFileSync (outputPath, render(employees))
 }
-// function call to initialize program
 init();
+
 
 
 // After the user has input all employees desired, call the `render` function (required
