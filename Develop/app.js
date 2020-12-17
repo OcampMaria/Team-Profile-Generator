@@ -83,30 +83,26 @@ const intern = [
 
 // function to write html files
 function writeToFile(fileName, data) {
-    // process.cwd-build direction out. location of the file. 
+    // process.cwd-build direction out.location of the file. 
    return fs.writeFileSync(path.join(process.cwd(), fileName), data)
    
 };
 
 
 
-
-const addmanager = () => {inquirer.prompt(manager).then(responseAnswers => {
-   
+const addemployee = () => {
     inquirer.prompt({
         type: 'confirm',
         name: 'addemployee',
         message: 'Do you want to add another employee?'
     }).then(response => {
-        console.log(response);
         if (response.addemployee === true){
             inquirer.prompt({
                 type: 'list',
                 name: 'kind',
-                choices:['manager','employee', 'intern', 'engineer'],
+                choices:['manager', 'intern', 'engineer'],
                 message: 'What kind of employee do you want to add?'
         }).then(response => {
-            console.log(response.kind);
             switch (response.kind) {
                 case 'manager':
                     addmanager();
@@ -123,31 +119,25 @@ const addmanager = () => {inquirer.prompt(manager).then(responseAnswers => {
         })
     }
     })
-
-});
 };
 
-const addEngineer = ()=>(inquirer.prompt(engineer)).then(responseAnswers =>{
+const addmanager = ()=>(inquirer.prompt(manager)).then(responseAnswers =>{
+    addemployee ()
+});
 
+const addEngineer = ()=>(inquirer.prompt(engineer)).then(responseAnswers =>{
+    addemployee ()
 });
 
 const addIntern = ()=>(inquirer.prompt(intern)).then(responseAnswers =>{
-    
+    addemployee ()
 });
 
 
 // function to initialize program
 function init() {
-    addmanager ();
-    // Employee ();
-    // engineer ();
-
-    // inquirer.prompt(teamMembers).then(responseAnswers => {
-    //     // function gets us what we want 
-    //     const htmlRender = render(responseAnswers)
-    //     writeToFile('main.html', htmlRender)
-    // });
-
+    addmanager();
+    
 }
 // function call to initialize program
 init();
