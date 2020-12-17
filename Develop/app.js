@@ -88,29 +88,11 @@ function writeToFile(fileName, data) {
    
 };
 
-// const addAnotherE = (responseAnwers)=> {
-//     inquirer.prompt({
-//         type: 'confirm',
-//         name: 'addemployee',
-//         message: 'Do you want to add another employee?'
-//     }).then(response => {
-//         console.log(response);
-//         if (response.addemployee === true){
-//             inquirer.prompt({
-//                 type: 'list',
-//                 name: 'kind',
-//                 choices:['manager','employee', 'intern', 'ingineer'],
-//                 message: 'What kind of employee do you want to add?'
-//         }).then(response => {
-//             console.log(response);
-//         })
-//     }
-//     })
-// }
 
-const prompt = () => {inquirer.prompt(manager).then(responseAnswers => {
-    // addAnotherE ();
 
+
+const addmanager = () => {inquirer.prompt(manager).then(responseAnswers => {
+   
     inquirer.prompt({
         type: 'confirm',
         name: 'addemployee',
@@ -121,20 +103,50 @@ const prompt = () => {inquirer.prompt(manager).then(responseAnswers => {
             inquirer.prompt({
                 type: 'list',
                 name: 'kind',
-                choices:['manager','employee', 'intern', 'ingineer'],
+                choices:['manager','employee', 'intern', 'engineer'],
                 message: 'What kind of employee do you want to add?'
         }).then(response => {
-            console.log(response);
+            console.log(response.kind);
+            switch (response.kind) {
+                case 'manager':
+                    addmanager();
+                    break;
+                case 'engineer':
+                    addEngineer();
+                    break;
+                case 'intern':
+                    addIntern();
+                    break;
+                default:
+                   console.log("done");
+            }
         })
     }
     })
 
 });
-}
+};
+
+const addEngineer = ()=>(inquirer.prompt(engineer)).then(responseAnswers =>{
+
+});
+
+const addIntern = ()=>(inquirer.prompt(intern)).then(responseAnswers =>{
+    
+});
+
 
 // function to initialize program
 function init() {
-    prompt ()
+    addmanager ();
+    // Employee ();
+    // engineer ();
+
+    // inquirer.prompt(teamMembers).then(responseAnswers => {
+    //     // function gets us what we want 
+    //     const htmlRender = render(responseAnswers)
+    //     writeToFile('main.html', htmlRender)
+    // });
 
 }
 // function call to initialize program
