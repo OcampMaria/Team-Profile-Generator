@@ -11,73 +11,139 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-// prompts
-const teamMembers = [
-
-    {
-        type: 'input',
-        name: 'role',
-        message: 'What is the team member role in the company?'
-    },
+const manager = [
     {
         type: 'input',
         name: 'name',
-        message: 'What is the team members Name?'
-    }, 
-
-    {
-        type: 'input',
-        name: 'email',
-        message: 'What is the team members email?'
+        message: "what is the Manager's name?"
     },
     {
         type: 'input',
         name: 'id',
-        message: 'What is the team members ID?'
+        message: "what is the Manager's id?"
     },
     {
         type: 'input',
-        name: 'github',
-        message: 'What is the team members GitHub username?'
+        name: 'email',
+        message: "what is the Manager's email?"
     },
     {
         type: 'input',
-        name: 'school',
-        message: 'What is the team members school name?'
-    },
-    {
-        type: 'input',
-        name: 'office',
-        message: 'What is the team members office number?'
+        name: 'officenum',
+        message: "what is the Manager's office number?"
     },
 ]
 
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
+const engineer = [
+    {
+        type: 'input',
+        name: 'name',
+        message: "what is the engineer's name?"
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: "what is the engineer's id?"
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: "what is the engineer's email?"
+    },
+    {
+        type: 'github',
+        name: 'officenum',
+        message: "what is the engineer's github username?"
+    },
+]
+const intern = [
+    {
+        type: 'input',
+        name: 'name',
+        message: "what is the intern's name?"
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: "what is the intern's id?"
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: "what is the intern's email?"
+    },
+    {
+        type: 'school',
+        name: 'officenum',
+        message: "what is the intern's school name?"
+    },
+]
+
+
 
 // function to write html files
 function writeToFile(fileName, data) {
     // process.cwd-build direction out. location of the file. 
    return fs.writeFileSync(path.join(process.cwd(), fileName), data)
    
+};
+
+// const addAnotherE = (responseAnwers)=> {
+//     inquirer.prompt({
+//         type: 'confirm',
+//         name: 'addemployee',
+//         message: 'Do you want to add another employee?'
+//     }).then(response => {
+//         console.log(response);
+//         if (response.addemployee === true){
+//             inquirer.prompt({
+//                 type: 'list',
+//                 name: 'kind',
+//                 choices:['manager','employee', 'intern', 'ingineer'],
+//                 message: 'What kind of employee do you want to add?'
+//         }).then(response => {
+//             console.log(response);
+//         })
+//     }
+//     })
+// }
+
+const prompt = () => {inquirer.prompt(manager).then(responseAnswers => {
+    // addAnotherE ();
+
+    inquirer.prompt({
+        type: 'confirm',
+        name: 'addemployee',
+        message: 'Do you want to add another employee?'
+    }).then(response => {
+        console.log(response);
+        if (response.addemployee === true){
+            inquirer.prompt({
+                type: 'list',
+                name: 'kind',
+                choices:['manager','employee', 'intern', 'ingineer'],
+                message: 'What kind of employee do you want to add?'
+        }).then(response => {
+            console.log(response);
+        })
+    }
+    })
+
+});
 }
 
 // function to initialize program
 function init() {
-    // inquirer asks questions
-    // prompt(teamMembers)- all questions from questions array
-    inquirer.prompt(teamMembers).then(responseAnswers => {
-        // function gets us what we want 
-        const htmlRender = render(responseAnswers)
-        writeToFile('main.html', htmlRender)
-    });
+    prompt ()
+
 }
 // function call to initialize program
 init();
 
+
+// After the user has input all employees desired, call the `render` function (required
+// above) and pass in an array containing all employee objects; the `render` function will
+// generate and return a block of HTML including templated divs for each employee!
 
 
 // After you have your html, you're now ready to create an HTML file using the HTML
