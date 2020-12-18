@@ -1,5 +1,7 @@
 # Team-Profile-Generator
+ ![team profile generator app](/Assets/app.jpg)
 
+  
   ## Table of Contents
   * [Description](#description)
   * [Installation](#installation)
@@ -24,11 +26,14 @@
   to intall this project, the user will need to install npm, and npm inquirer. To test the application, the user needs to use the Jest test which is already inluded in the repo. 
 
   ## Usage 
-  To be able to use this application, the user needs to open their local console, move inside their cloned folder and run the applciation by typing 'node.js.' The console will prompt the user to answer questions based on the employees. After they are done answerign all of the questions, they will see a new file inside the output folder. The folder will contain the new team html file. 
+  To be able to use this application, the user needs to open their local console, move inside their cloned folder and run the applciation by typing 'node app.js.' The console will prompt the user to answer questions based on the employees. After they are done answerign all of the questions, they will see a new file inside the output folder. The folder will contain the new team html file. 
 
   Here is a preview of how the Web application Looks Like and how to use it: 
+  https://drive.google.com/file/d/1I5uJ9tELZFIhTfwKR8krZ9fYRoTDVh_0/view
+  ![team profile generator demo](/Assets/Team-Profile-Generator.gif)
 
-  ![team profile generator demo]("relative path")
+
+  ![team profile generator](/Assets/teminal2.jpg)
 
   ## Deployed Application 
   The link to the application repo can be accessed on the following link: 
